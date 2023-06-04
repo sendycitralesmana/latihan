@@ -48,6 +48,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
+                            <th>Students</th>
                             <th>Option</th>
                         </tr>
                     </thead>
@@ -56,6 +57,11 @@
                         <tr>
                             <td>{{ $data->id }}</td>
                             <td>{{ $data->name }}</td>
+                            <td>
+                                @foreach ($data->students as $student)
+                                {{ $student['name'] }} <br>
+                                @endforeach
+                            </td>
                             <td>
                                 <a class="btn btn-warning btn-sm" href="/customer/{{ $data->id }}/edit">Edit</a>
                                 <a class="btn btn-danger btn-sm" href="/customer/{{ $data->id }}/delete"

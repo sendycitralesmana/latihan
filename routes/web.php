@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Backend\DashboardController as DashboardController;
 use App\Http\Controllers\Backend\CustomerController as CustomerController;
+use App\Http\Controllers\StudentsController as StudentsController;
 use App\Http\Controllers\ClassController as ClassController;
 
 /*
@@ -29,6 +30,14 @@ Route::post('/customer/create', [CustomerController::class, 'create']);
 Route::get('/customer/edit', [CustomerController::class, 'edit']);
 Route::post('/customer/{id}/update', [CustomerController::class, 'update']);
 Route::get('/customer/{id}/delete', [CustomerController::class, 'delete']);
+
+// Student
+Route::get('/students', [StudentsController::class, 'index']);
+Route::get('/students/add', [StudentsController::class, 'add']);
+Route::post('/students/create', [StudentsController::class, 'create']);
+Route::get('/students/edit', [StudentsController::class, 'edit']);
+Route::post('/students/{id}/update', [StudentsController::class, 'update']);
+Route::get('/students/{id}/delete', [StudentsController::class, 'delete']);
 
 // Class
 Route::get('/class', [ClassController::class, 'index']);
