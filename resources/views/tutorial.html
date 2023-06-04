@@ -1,0 +1,26 @@
+- Mengisi table database dengan factory (faker)
+    -> php artisan db:seed --class=fileSeeder
+    -> php artisan db:seed
+
+- Mengisi table database dengan factory (faker)
+    -> php artisan make:factory (nama_factory)
+    -> https://fakerphp.github.io/
+    -> intall faker 
+    -> factory -> file nama_factory
+
+    use Faker\Factory as faker;
+    use Illuminate\Support\Arr;
+
+    $faker = faker::create();
+    return [
+        'name' => $faker->name(),
+        'nis' => mt_rand(0000001, 9999999),
+        'gender' => Arr::random(['L', 'P']),
+        'id_class' => Arr::random([1, 2, 3])
+    ];
+
+    -> seeder -> file nama_seeder
+
+    Students::factory()->create(); = add 1 data
+    Students::factory()->count(20)->create();
+
