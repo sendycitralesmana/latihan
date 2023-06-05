@@ -36,6 +36,24 @@
                         <p>Customer</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/students" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>Student</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/class" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>Class</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/ekskuls" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>Ekskul</p>
+                    </a>
+                </li>
 
             </ul>
         </nav>

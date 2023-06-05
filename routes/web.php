@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\DashboardController as DashboardController;
 use App\Http\Controllers\Backend\CustomerController as CustomerController;
 use App\Http\Controllers\StudentsController as StudentsController;
 use App\Http\Controllers\ClassController as ClassController;
+use App\Http\Controllers\EkskulController as EkskulController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,3 +47,11 @@ Route::post('/class/create', [ClassController::class, 'create']);
 Route::get('/class/edit', [ClassController::class, 'edit']);
 Route::post('/class/{id}/update', [ClassController::class, 'update']);
 Route::get('/class/{id}/delete', [ClassController::class, 'delete']);
+
+// Ekskul
+Route::get('/ekskuls', [EkskulController::class, 'index']);
+Route::get('/ekskuls/add', [EkskulController::class, 'add']);
+Route::post('/ekskuls/create', [EkskulController::class, 'create']);
+Route::get('/ekskuls/edit', [EkskulController::class, 'edit']);
+Route::post('/ekskuls/{id}/update', [EkskulController::class, 'update']);
+Route::get('/ekskuls/{id}/delete', [EkskulController::class, 'delete']);
