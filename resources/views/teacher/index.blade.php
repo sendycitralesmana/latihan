@@ -1,6 +1,7 @@
+
 @extends('backend.layout.main')
 
-@section('title', 'Class')
+@section('title', 'Teacher')
 
 @section('content')
 <!-- Content Wrapper. Contains page content -->
@@ -10,12 +11,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Blank Page</h1>
+                    <h1>Teacher Page</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Blank Page</li>
+                        <li class="breadcrumb-item active">Teacher Page</li>
                     </ol>
                 </div>
             </div>
@@ -48,22 +49,14 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Students</th>
-                            <th>Teacher</th>
                             <th>Option</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($class as $data)
+                        @foreach($teachers as $data)
                         <tr>
                             <td>{{ $data->id }}</td>
                             <td>{{ $data->name }}</td>
-                            <td>
-                                @foreach ($data->students as $student)
-                                - {{ $student['name'] }} <br>
-                                @endforeach
-                            </td>
-                            <td>{{ $data->teachers['name'] }}</td>
                             <td>
                                 <a class="btn btn-warning btn-sm" href="/customer/{{ $data->id }}/edit">Edit</a>
                                 <a class="btn btn-danger btn-sm" href="/customer/{{ $data->id }}/delete"
@@ -76,8 +69,6 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Students</th>
-                            <th>Teacher</th>
                             <th>Option</th>
                         </tr>
                     </tfoot>

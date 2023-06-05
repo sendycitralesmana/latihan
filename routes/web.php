@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\CustomerController as CustomerController;
 use App\Http\Controllers\StudentsController as StudentsController;
 use App\Http\Controllers\ClassController as ClassController;
 use App\Http\Controllers\EkskulController as EkskulController;
+use App\Http\Controllers\TeacherController as TeacherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,3 +56,11 @@ Route::post('/ekskuls/create', [EkskulController::class, 'create']);
 Route::get('/ekskuls/edit', [EkskulController::class, 'edit']);
 Route::post('/ekskuls/{id}/update', [EkskulController::class, 'update']);
 Route::get('/ekskuls/{id}/delete', [EkskulController::class, 'delete']);
+
+// Teacher
+Route::get('/teachers', [TeacherController::class, 'index']);
+Route::get('/teachers/add', [TeacherController::class, 'add']);
+Route::post('/teachers/create', [TeacherController::class, 'create']);
+Route::get('/teachers/edit', [TeacherController::class, 'edit']);
+Route::post('/teachers/{id}/update', [TeacherController::class, 'update']);
+Route::get('/teachers/{id}/delete', [TeacherController::class, 'delete']);

@@ -10,7 +10,7 @@ class ClassController extends Controller
     public function index()
     {
         // $class = ClassRoom::all();
-        $class = ClassRoom::with('students')->get();    // eloquent relationship
+        $class = ClassRoom::with('students', 'teachers')->get();    // eloquent relationship
         return view('Class.index', [
             'class' => $class
         ]);

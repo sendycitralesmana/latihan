@@ -54,7 +54,12 @@
                         <p>Ekskul</p>
                     </a>
                 </li>
-
+                <li class="nav-item">
+                    <a href="/teachers" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>Teacher</p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

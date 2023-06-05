@@ -52,6 +52,7 @@
                             <th>Gender</th>
                             <th>Class</th>
                             <th>Ekskul</th>
+                            <th>Teacher</th>
                             <th>Option</th>
                         </tr>
                     </thead>
@@ -68,6 +69,7 @@
                                 - {{ $ekskul->name }} <br>
                                 @endforeach
                             </td>
+                            <td>{{ $data->class->teachers->name }}</td>
                             <td>
                                 <a class="btn btn-warning btn-sm" href="/students/{{ $data->id }}/edit">Edit</a>
                                 <a class="btn btn-danger btn-sm" href="/students/{{ $data->id }}/delete"
@@ -84,6 +86,7 @@
                             <th>Gender</th>
                             <th>Class</th>
                             <th>Ekskul</th>
+                            <th>Teacher</th>
                             <th>Option</th>
                         </tr>
                     </tfoot>
