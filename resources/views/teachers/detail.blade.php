@@ -1,6 +1,6 @@
 @extends('backend.layout.main')
 
-@section('title', 'Ekskul')
+@section('title', 'Teacher')
 
 @section('content')
 <!-- Content Wrapper. Contains page content -->
@@ -10,12 +10,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Ekskul Page</h1>
+                    <h1>Teacher Page</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard/backend">Home</a></li>
-                        <li class="breadcrumb-item active">Ekskul Page</li>
+                        <li class="breadcrumb-item active">Teacher Page</li>
                     </ol>
                 </div>
             </div>
@@ -48,35 +48,46 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            {{-- <th>Student</th> --}}
-                            <th>Option</th>
+                            <th>Class</th>
+                            <th>Students</th>
+                            {{-- <th>Option</th> --}}
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($ekskuls as $data)
                         <tr>
-                            <td>{{ $data->id }}</td>
-                            <td>{{ $data->name }}</td>
-                            {{-- <td>
-                                @foreach ($data->students as $student)
-                                - {{ $student->name }} <br>
-                                @endforeach
-                            </td> --}}
+                            <td>{{ $teachers->id }}</td>
+                            <td>{{ $teachers->name }}</td>
                             <td>
-                                <a class="btn btn-info btn-sm" href="/ekskuls/{{ $data->id }}/detail">Detail</a>
-                                <a class="btn btn-warning btn-sm" href="/ekskuls/{{ $data->id }}/edit">Edit</a>
-                                <a class="btn btn-danger btn-sm" href="/ekskuls/{{ $data->id }}/delete"
-                                    onClick="return confirm('Anda Yakin ?')">Delete</a>
+                                @if( $teachers->class )
+                                    {{ $teachers->class->name }}
+                                @else
+                                    -
+                                @endif
                             </td>
+                            <td>
+                                @if( $teachers->class )
+                                    @foreach ($teachers->class->students as $clas)
+                                    - {{ $clas->name }} <br>
+                                    @endforeach
+                                @else
+                                    -
+                                @endif
+                            </td>
+                            {{-- <td>
+                                <a class="btn btn-info btn-sm" href="/students/{{ $students->id }}/detail">Detail</a>
+                                <a class="btn btn-warning btn-sm" href="/students/{{ $students->id }}/edit">Edit</a>
+                                <a class="btn btn-danger btn-sm" href="/students/{{ $students->id }}/delete"
+                                    onClick="return confirm('Anda Yakin ?')">Delete</a>
+                            </td> --}}
                         </tr>
-                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            {{-- <th>Student</th> --}}
-                            <th>Option</th>
+                            <th>Classs</th>
+                            <th>Students</th>
+                            {{-- <th>Option</th> --}}
                         </tr>
                     </tfoot>
                 </table>

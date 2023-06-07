@@ -9,9 +9,18 @@ class EkskulController extends Controller
 {
     public function index()
     {
-        // $ekskuls = Ekskul::all();
-        $ekskuls = Ekskul::with('students')->get();
+        $ekskuls = Ekskul::all();
+        // $ekskuls = Ekskul::with('students')->get();
         return view('ekskuls.index', [
+            'ekskuls' => $ekskuls
+        ]);
+    }
+
+    public function detail($id)
+    {
+        // $ekskuls = Ekskul::all();
+        $ekskuls = Ekskul::with('students')->find($id);
+        return view('ekskuls.detail', [
             'ekskuls' => $ekskuls
         ]);
     }

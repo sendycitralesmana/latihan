@@ -50,9 +50,9 @@
                             <th>Name</th>
                             <th>Nis</th>
                             <th>Gender</th>
-                            <th>Class</th>
+                            {{-- <th>Class</th>
                             <th>Ekskul</th>
-                            <th>Teacher</th>
+                            <th>Teacher</th> --}}
                             <th>Option</th>
                         </tr>
                     </thead>
@@ -63,14 +63,15 @@
                             <td>{{ $data->name }}</td>
                             <td>{{ $data->nis }}</td>
                             <td>{{ $data->gender }}</td>
-                            <td>{{ $data->class['name'] }}</td>
+                            {{-- <td>{{ $data->class['name'] }}</td>
                             <td>
                                 @foreach ($data->ekskuls as $ekskul)
                                 - {{ $ekskul->name }} <br>
                                 @endforeach
                             </td>
-                            <td>{{ $data->class->teachers->name }}</td>
+                            <td>{{ $data->class->teachers->name }}</td> --}}
                             <td>
+                                <a class="btn btn-info btn-sm" href="/students/{{ $data->id }}/detail">Detail</a>
                                 <a class="btn btn-warning btn-sm" href="/students/{{ $data->id }}/edit">Edit</a>
                                 <a class="btn btn-danger btn-sm" href="/students/{{ $data->id }}/delete"
                                     onClick="return confirm('Anda Yakin ?')">Delete</a>
@@ -84,9 +85,9 @@
                             <th>Name</th>
                             <th>Nis</th>
                             <th>Gender</th>
-                            <th>Class</th>
+                            {{-- <th>Class</th>
                             <th>Ekskul</th>
-                            <th>Teacher</th>
+                            <th>Teacher</th> --}}
                             <th>Option</th>
                         </tr>
                     </tfoot>

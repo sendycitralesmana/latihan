@@ -48,8 +48,8 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Students</th>
-                            <th>Teacher</th>
+                            {{-- <th>Students</th>
+                            <th>Teacher</th> --}}
                             <th>Option</th>
                         </tr>
                     </thead>
@@ -58,13 +58,14 @@
                         <tr>
                             <td>{{ $data->id }}</td>
                             <td>{{ $data->name }}</td>
-                            <td>
+                            {{-- <td>
                                 @foreach ($data->students as $student)
                                 - {{ $student['name'] }} <br>
                                 @endforeach
                             </td>
-                            <td>{{ $data->teachers['name'] }}</td>
+                            <td>{{ $data->teachers['name'] }}</td> --}}
                             <td>
+                                <a class="btn btn-info btn-sm" href="/class/{{ $data->id }}/detail">Detail</a>
                                 <a class="btn btn-warning btn-sm" href="/customer/{{ $data->id }}/edit">Edit</a>
                                 <a class="btn btn-danger btn-sm" href="/customer/{{ $data->id }}/delete"
                                     onClick="return confirm('Anda Yakin ?')">Delete</a>
@@ -76,8 +77,8 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Students</th>
-                            <th>Teacher</th>
+                            {{-- <th>Students</th>
+                            <th>Teacher</th> --}}
                             <th>Option</th>
                         </tr>
                     </tfoot>

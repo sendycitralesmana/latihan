@@ -10,7 +10,16 @@ class TeacherController extends Controller
     public function index()
     {
         $teachers = Teacher::all();
-        return view('teacher/index', [
+        return view('teachers/index', [
+            'teachers' => $teachers
+        ]);
+    }
+
+    public function detail($id)
+    {
+        // $teacher = Teacher::all();
+        $teachers = Teacher::with('class.students')->find($id);     // eloquent relationship
+        return view('teachers/detail', [
             'teachers' => $teachers
         ]);
     }
