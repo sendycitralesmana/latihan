@@ -10,6 +10,9 @@ class Ekskul extends Model
     use HasFactory;
 
     protected $table = 'ekskuls';
+    protected $fillable = [
+        'name'
+    ];
 
     public function students()
     {

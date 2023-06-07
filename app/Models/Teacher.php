@@ -9,6 +9,10 @@ class Teacher extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name'
+    ];
+
     public function class()
     {
         return $this->hasOne(ClassRoom::class, 'id_teacher', 'id');

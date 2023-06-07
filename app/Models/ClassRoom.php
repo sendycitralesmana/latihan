@@ -12,6 +12,7 @@ class ClassRoom extends Model
     protected $table = 'class';
     protected $fillable = [
         'name',
+        'id_teacher'
     ];
 
     public function students()
