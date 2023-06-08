@@ -38,4 +38,22 @@ class EkskulController extends Controller
             'ekskuls' => $ekskuls
         ]);
     }
+
+    public function edit($id)
+    {
+        $ekskuls = Ekskul::find($id);
+        return view('ekskuls/edit', [
+            'ekskuls' => $ekskuls
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        // dd($request->all());
+        $ekskuls = Ekskul::find($id);
+        $ekskuls->name = $request->name;
+        $ekskuls->save();
+
+        return redirect('/ekskuls')->with('success', 'Success update data');
+    }
 }

@@ -37,4 +37,22 @@ class TeacherController extends Controller
             'teachers' => $teachers
         ]);
     }
+
+    public function edit($id)
+    {
+        $teachers = Teacher::find($id);
+        return view('teachers/edit', [
+            'teachers' => $teachers
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        // dd($request->all());
+        $teachers = Teacher::find($id);
+        $teachers->name = $request->name;
+        $teachers->save();
+
+        return redirect('/teachers')->with('success', 'Success update data');
+    }
 }

@@ -43,4 +43,25 @@ class ClassController extends Controller
             'class' => $class
         ]);
     }
+
+    public function edit($id)
+    {
+        $class = ClassRoom::with('teachers')->find($id);
+        $teachers = Teacher::where('id', '!=', $class->id_teacher)->get();
+        return view('class/edit', [
+            'class' => $class,
+            'teachers' => $teachers
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        // dd($request->all());
+        $teachers = ClassRoom::find($id);
+        $teachers->name = $request->name;
+        $teachers->id_teacher = $request->id_teacher;
+        $teachers->save();
+
+        return redirect('/teachers')->with('success', 'Success update data');
+    }
 }

@@ -47,4 +47,27 @@ class StudentsController extends Controller
             'students' => $students
         ]);
     }
+
+    public function edit($id)
+    {
+        $students = Students::with('class')->find($id);
+        $class = ClassRoom::where('id', '!=', $students->id_class)->get();
+        return view('students/edit', [
+            'students' => $students,
+            'class' => $class
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        // dd($request->all());
+        $students = Students::find($id);
+        $students->name = $request->name;
+        $students->nis = $request->nis;
+        $students->gender = $request->gender;
+        $students->id_class = $request->id_class;
+        $students->save();
+
+        return redirect('/students')->with('success', 'Success update data');
+    }
 }
