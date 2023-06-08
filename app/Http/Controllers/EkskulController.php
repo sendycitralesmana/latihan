@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Request\Ekskul\EkskulCreateRequest;
 use App\Models\Ekskul;
+
 
 class EkskulController extends Controller
 {
@@ -21,7 +23,7 @@ class EkskulController extends Controller
         return view('ekskuls/add');
     }
 
-    public function create(Request $request)
+    public function create(ClassCreateRequest $request)
     {
         $ekskuls = new Ekskul;
         $ekskuls->name = $request->name;

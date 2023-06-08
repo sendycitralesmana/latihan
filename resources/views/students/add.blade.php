@@ -48,11 +48,19 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Name</label>
-                            <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter name" required>
+                            <input type="text" name="name" class="form-control" id="exampleInputEmail1"
+                                placeholder="Enter name" value="{{ old('name') }}">
+                            @if($errors->has('name'))
+                            <span class="help-block">{{ $errors->first('name') }}</span>
+                            @endif
                         </div>
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('nis') ? 'has-error' : '' }}">
                             <label for="exampleInputEmail1">NIS</label>
-                            <input type="text" name="nis" class="form-control" id="exampleInputEmail1" placeholder="Enter NIS" required>
+                            <input type="text" name="nis" class="form-control" id="exampleInputEmail1"
+                                placeholder="Enter NIS" value="{{ old('nis') }}">
+                            @if($errors->has('nis'))
+                            <span class="help-block">{{ $errors->first('nis') }}</span>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Gender</label>
@@ -67,7 +75,7 @@
                             <select name="id_class" class="form-control">
                                 <option value="">option 1</option>
                                 @foreach($class as $data)
-                                    <option value="{{ $data->id }}">{{ $data->name }}</option>
+                                <option value="{{ $data->id }}">{{ $data->name }}</option>
                                 @endforeach
                             </select>
                         </div>

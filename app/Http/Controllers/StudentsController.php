@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Students\StudentCreateRequest;
 use Illuminate\Http\Request;
 use \App\Models\Students;
 use \App\Models\ClassRoom;
@@ -25,8 +26,16 @@ class StudentsController extends Controller
         ]);
     }
 
-    public function create(Request $request)
+    public function create(StudentCreateRequest $request)
     {
+        // php artisan make:request nama_request -> app->http->request
+        // $validated = $request->validate([
+        //     'name' => 'required',
+        //     'nis' => 'unique:students',
+        //     'gender' => 'required',
+        //     'id_class' => 'required'
+        // ]);
+
         $students = new Students;
         $students->name = $request->name;
         $students->nis = $request->nis;

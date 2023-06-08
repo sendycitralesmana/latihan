@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Http\Requests\Class\ClassCreateRequest;
 use \App\Models\ClassRoom;
 use \App\Models\Teacher;
 
@@ -25,7 +26,7 @@ class ClassController extends Controller
         ]);
     }
 
-    public function create(Request $request)
+    public function create(ClassCreateRequest $request)
     {
         $class = new ClassRoom;
         $class->name = $request->name;

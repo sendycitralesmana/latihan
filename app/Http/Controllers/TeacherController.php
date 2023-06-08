@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Teacher;
+use App\Http\Requests\Teacher\TeacherCreateRequest;
 
 class TeacherController extends Controller
 {
@@ -20,7 +21,7 @@ class TeacherController extends Controller
         return view('teachers/add');
     }
 
-    public function create(Request $request)
+    public function create(TeacherCreateRequest $request)
     {
         $teachers = new Teacher;
         $teachers->name = $request->name;
