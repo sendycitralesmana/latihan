@@ -51,7 +51,7 @@ class StudentsController extends Controller
     public function detail($id)
     {
         // $students = Students::all();
-        $students = Students::with(['class.teachers', 'ekskuls'])->find($id);     // eloquent relationship
+        $students = Students::with(['class.teachers', 'ekskuls'])->findOrFail($id);     // eloquent relationship
         return view('students/detail', [
             'students' => $students
         ]);
@@ -59,7 +59,7 @@ class StudentsController extends Controller
 
     public function edit($id)
     {
-        $students = Students::with('class')->find($id);
+        $students = Students::with('class')->findOrFail($id);
         $class = ClassRoom::where('id', '!=', $students->id_class)->get();
         return view('students/edit', [
             'students' => $students,
@@ -70,7 +70,7 @@ class StudentsController extends Controller
     public function update(Request $request, $id)
     {
         // dd($request->all());
-        $students = Students::find($id);
+        $students = Students::findOrFail($id);
         $students->name = $request->name;
         $students->nis = $request->nis;
         $students->gender = $request->gender;
@@ -78,5 +78,13 @@ class StudentsController extends Controller
         $students->save();
 
         return redirect('/students')->with('success', 'Success update data');
+    }
+
+    public function delete($id)
+    {
+        $students = Students::findOrFail($id);
+        $students->delete();
+
+        return redirect('/students')->with('success', 'Success delete data dengan id' . $id );
     }
 }

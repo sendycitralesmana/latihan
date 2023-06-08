@@ -35,7 +35,7 @@ class EkskulController extends Controller
     public function detail($id)
     {
         // $ekskuls = Ekskul::all();
-        $ekskuls = Ekskul::with('students')->find($id);
+        $ekskuls = Ekskul::with('students')->findOrFail($id);
         return view('ekskuls.detail', [
             'ekskuls' => $ekskuls
         ]);
@@ -43,7 +43,7 @@ class EkskulController extends Controller
 
     public function edit($id)
     {
-        $ekskuls = Ekskul::find($id);
+        $ekskuls = Ekskul::findOrFail($id);
         return view('ekskuls/edit', [
             'ekskuls' => $ekskuls
         ]);
@@ -52,10 +52,18 @@ class EkskulController extends Controller
     public function update(Request $request, $id)
     {
         // dd($request->all());
-        $ekskuls = Ekskul::find($id);
+        $ekskuls = Ekskul::findOrFail($id);
         $ekskuls->name = $request->name;
         $ekskuls->save();
 
         return redirect('/ekskuls')->with('success', 'Success update data');
+    }
+
+    public function delete($id)
+    {
+        $ekskuls = Ekskul::findOrFail($id);
+        $ekskuls->delete();
+
+        return redirect('/ekskuls')->with('success', 'Success delete data dengan id' . $id );
     }
 }

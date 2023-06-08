@@ -33,7 +33,7 @@ class TeacherController extends Controller
     public function detail($id)
     {
         // $teacher = Teacher::all();
-        $teachers = Teacher::with('class.students')->find($id);     // eloquent relationship
+        $teachers = Teacher::with('class.students')->findOrFail($id);     // eloquent relationship
         return view('teachers/detail', [
             'teachers' => $teachers
         ]);
@@ -41,7 +41,7 @@ class TeacherController extends Controller
 
     public function edit($id)
     {
-        $teachers = Teacher::find($id);
+        $teachers = Teacher::findOrFail($id);
         return view('teachers/edit', [
             'teachers' => $teachers
         ]);
@@ -50,10 +50,18 @@ class TeacherController extends Controller
     public function update(Request $request, $id)
     {
         // dd($request->all());
-        $teachers = Teacher::find($id);
+        $teachers = Teacher::findOrFail($id);
         $teachers->name = $request->name;
         $teachers->save();
 
         return redirect('/teachers')->with('success', 'Success update data');
+    }
+
+    public function delete($id)
+    {
+        $teachers = Teacher::findOrFail($id);
+        $teachers->delete();
+
+        return redirect('/teachers')->with('success', 'Success delete data dengan id' . $id );
     }
 }

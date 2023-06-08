@@ -39,7 +39,7 @@ class ClassController extends Controller
     public function detail($id)
     {
         // $class = ClassRoom::all();
-        $class = ClassRoom::with('students', 'teachers')->find($id);    // eloquent relationship
+        $class = ClassRoom::with('students', 'teachers')->findOrFail($id);    // eloquent relationship
         return view('Class.detail', [
             'class' => $class
         ]);
@@ -47,7 +47,7 @@ class ClassController extends Controller
 
     public function edit($id)
     {
-        $class = ClassRoom::with('teachers')->find($id);
+        $class = ClassRoom::with('teachers')->findOrFail($id);
         $teachers = Teacher::where('id', '!=', $class->id_teacher)->get();
         return view('class/edit', [
             'class' => $class,
@@ -58,11 +58,19 @@ class ClassController extends Controller
     public function update(Request $request, $id)
     {
         // dd($request->all());
-        $teachers = ClassRoom::find($id);
+        $teachers = ClassRoom::findOrFail($id);
         $teachers->name = $request->name;
         $teachers->id_teacher = $request->id_teacher;
         $teachers->save();
 
         return redirect('/teachers')->with('success', 'Success update data');
+    }
+
+    public function delete($id)
+    {
+        $teachers = ClassRoom::findOrFail($id);
+        $teachers->delete();
+
+        return redirect('/teachers')->with('success', 'Success delete data dengan id' . $id );
     }
 }
