@@ -43,6 +43,13 @@
                 </div>
             </div>
             <div class="card-body">
+                <div class="my-3 d-flex justify-content-center">
+                    @if( $students->image != '' )
+                        <img src="{{asset('storage/image/'.$students->image)}}" alt="" width="200px" height="200px">
+                    @else
+                        <img src="{{asset('storage/imageDefault/default.png')}}" alt="" width="200px" height="200px">
+                    @endif
+                </div>
             <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>

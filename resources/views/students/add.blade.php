@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form role="form" method="POST" action="/students/create">
+                <form role="form" method="POST" action="/students/create" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="card-body">
                         <div class="form-group">
@@ -78,6 +78,18 @@
                                 <option value="{{ $data->id }}">{{ $data->name }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">Image</label>
+                            <div class="input-group">
+                                <input type="file" name="image" class="form-control">
+                              {{-- <div class="input-group-append">
+                                <span class="input-group-text" id="">Upload</span>
+                              </div> --}}
+                              @if($errors->has('image'))
+                            <span class="help-block">{{ $errors->first('image') }}</span>
+                            @endif
+                            </div>
                         </div>
                     </div>
                     <!-- /.card-body -->

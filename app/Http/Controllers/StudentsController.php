@@ -46,6 +46,23 @@ class StudentsController extends Controller
 
     public function create(StudentCreateRequest $request)
     {
+        $newName = "";
+        if($request->file('image')) {
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $newName = $request->name.'-'.now()->timestamp.'.'.$extension;
+            $request->file('image')->storeAs('image', $newName);
+        }
+        // data di folder storage tidak bisa di akses di browser kita maka harus kita hubungkan ke folder publik
+        // php artisan storage:link
+        
+        $students = new Students;
+        $students->name = $request->name;
+        $students->nis = $request->nis;
+        $students->gender = $request->gender;
+        $students->id_class = $request->id_class;
+        $students->image = $newName;
+        $students->save();
+        
         // php artisan make:request nama_request -> app->http->request
         // $validated = $request->validate([
         //     'name' => 'required',
@@ -53,14 +70,6 @@ class StudentsController extends Controller
         //     'gender' => 'required',
         //     'id_class' => 'required'
         // ]);
-
-        $students = new Students;
-        $students->name = $request->name;
-        $students->nis = $request->nis;
-        $students->gender = $request->gender;
-        $students->id_class = $request->id_class;
-        $students->save();
-
         return redirect('/students')->with('success', 'Success add data');
 
         // $students = Students::create($request->all()); Mass assignment

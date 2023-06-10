@@ -14,7 +14,8 @@ class Students extends Model
         'name',
         'nis',
         'gender',
-        'id_class'
+        'id_class',
+        'image'
     ];
 
     public function class()
