@@ -9,11 +9,19 @@ use \App\Models\ClassRoom;
 
 class StudentsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // $students = Students::all();
-        $students = Students::paginate(5);
         // $students = Students::with('class.teachers', 'ekskuls')->get();     // eloquent relationship
+        $search = $request->search;
+        $students = Students::with('class')
+                        ->where('name', 'LIKE', '%'.$search.'%')
+                        ->orWhere('gender', $search)
+                        ->orWhere('nis', 'LIKE', '%'.$search.'%')
+                        ->orWhereHas('class', function($classname) use($search) {
+                            $classname->where('name', 'LIKE', '%'.$search.'%');
+                        }) // relasi ke class
+                        ->paginate(5);
         return view('students/index', [
             'students' => $students
         ]);

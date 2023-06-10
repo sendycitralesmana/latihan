@@ -81,6 +81,20 @@
                         </tr>
                     </tfoot>
                 </table> --}}
+
+                <div class="my-3">
+                    <form action="" method="GET">
+                        <div class="input-group input-group mb-3 col-12 col-sm-8 col-md-6">
+                            <input class="form-control" placeholder="Search" name="search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -88,8 +102,8 @@
                             <th>Name</th>
                             <th>Nis</th>
                             <th>Gender</th>
-                            {{-- <th>Class</th>
-                            <th>Ekskul</th>
+                            <th>Class</th>
+                            {{-- <th>Ekskul</th>
                             <th>Teacher</th> --}}
                             <th>Option</th>
                         </tr>
@@ -101,8 +115,8 @@
                             <td>{{ $data->name }}</td>
                             <td>{{ $data->nis }}</td>
                             <td>{{ $data->gender }}</td>
-                            {{-- <td>{{ $data->class['name'] }}</td>
-                            <td>
+                            <td>{{ $data->class['name'] }}</td>
+                            {{-- <td>
                                 @foreach ($data->ekskuls as $ekskul)
                                 - {{ $ekskul->name }} <br>
                                 @endforeach
@@ -123,8 +137,8 @@
                             <th>Name</th>
                             <th>Nis</th>
                             <th>Gender</th>
-                            {{-- <th>Class</th>
-                            <th>Ekskul</th>
+                            <th>Class</th>
+                            {{-- <th>Ekskul</th>
                             <th>Teacher</th> --}}
                             <th>Option</th>
                         </tr>
@@ -132,7 +146,7 @@
                 </table>
 
                 <div class="my-3">
-                    {{ $students->links() }}
+                    {{ $students->withQueryString()->links() }}
                 </div>
 
             </div>
