@@ -17,6 +17,15 @@ class EkskulController extends Controller
             'ekskuls' => $ekskuls
         ]);
     }
+
+    public function show_delete()
+    {
+        // $students = Students::withTrashed()->get(); // show data with soft delete
+        $ekskuls = Ekskul::onlyTrashed()->get();
+        return view('ekskuls/show_delete', [
+            'ekskuls' => $ekskuls
+        ]);
+    }
     
     public function add()
     {
@@ -65,5 +74,12 @@ class EkskulController extends Controller
         $ekskuls->delete();
 
         return redirect('/ekskuls')->with('success', 'Success delete data dengan id' . $id );
+    }
+
+    public function restore($id)
+    {
+        $ekskuls = Ekskul::withTrashed()->where('id', $id)->restore();
+        
+        return redirect('/ekskuls')->with('success', 'Success restore data');
     }
 }

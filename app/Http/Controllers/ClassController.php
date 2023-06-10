@@ -18,6 +18,15 @@ class ClassController extends Controller
         ]);
     }
 
+    public function show_delete()
+    {
+        // $students = Students::withTrashed()->get(); // show data with soft delete
+        $class = ClassRoom::onlyTrashed()->get();
+        return view('class/show_delete', [
+            'class' => $class
+        ]);
+    }
+
     public function add()
     {
         $teachers = Teacher::all();
@@ -58,19 +67,26 @@ class ClassController extends Controller
     public function update(Request $request, $id)
     {
         // dd($request->all());
-        $teachers = ClassRoom::findOrFail($id);
-        $teachers->name = $request->name;
-        $teachers->id_teacher = $request->id_teacher;
-        $teachers->save();
+        $class = ClassRoom::findOrFail($id);
+        $class->name = $request->name;
+        $class->id_teacher = $request->id_teacher;
+        $class->save();
 
-        return redirect('/teachers')->with('success', 'Success update data');
+        return redirect('/class')->with('success', 'Success update data');
     }
 
     public function delete($id)
     {
-        $teachers = ClassRoom::findOrFail($id);
-        $teachers->delete();
+        $class = ClassRoom::findOrFail($id);
+        $class->delete();
 
-        return redirect('/teachers')->with('success', 'Success delete data dengan id' . $id );
+        return redirect('/class')->with('success', 'Success delete data dengan id' . $id );
+    }
+
+    public function restore($id)
+    {
+        $class = ClassRoom::withTrashed()->where('id', $id)->restore();
+        
+        return redirect('/class')->with('success', 'Success restore data');
     }
 }

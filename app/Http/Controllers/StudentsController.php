@@ -18,6 +18,15 @@ class StudentsController extends Controller
         ]);
     }
 
+    public function show_delete()
+    {
+        // $students = Students::withTrashed()->get(); // show data with soft delete
+        $students = Students::onlyTrashed()->get();
+        return view('students/show_delete', [
+            'students' => $students
+        ]);
+    }
+
     public function add()
     {
         $class = ClassRoom::all();
@@ -86,5 +95,12 @@ class StudentsController extends Controller
         $students->delete();
 
         return redirect('/students')->with('success', 'Success delete data dengan id' . $id );
+    }
+
+    public function restore($id)
+    {
+        $students = Students::withTrashed()->where('id', $id)->restore();
+        
+        return redirect('/students')->with('success', 'Success restore data');
     }
 }

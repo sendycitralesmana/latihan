@@ -36,8 +36,6 @@
                 </div>
                 @endif
                 <div class="card-tools">
-                    <a href="/class/add" class="btn btn-primary">Add Data</a>
-                    <a href="/class/show_delete" class="btn btn-info">Show Deleted Data</a>
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                         title="Collapse">
                         <i class="fas fa-minus"></i>
@@ -67,10 +65,8 @@
                             </td>
                             <td>{{ $data->teachers['name'] }}</td> --}}
                             <td>
-                                <a class="btn btn-info btn-sm" href="/class/{{ $data->id }}/detail">Detail</a>
-                                <a class="btn btn-warning btn-sm" href="/class/{{ $data->id }}/edit">Edit</a>
-                                <a class="btn btn-danger btn-sm" href="/class/{{ $data->id }}/delete"
-                                    onClick="return confirm('Anda Yakin ?')">Delete</a>
+                                <a class="btn btn-warning btn-sm" href="/class/{{ $data->id }}/restore"
+                                    onClick="return confirm('Anda Yakin ?')">Restore</a>
                             </td>
                         </tr>
                         @endforeach

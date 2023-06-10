@@ -37,6 +37,7 @@
                 @endif
                 <div class="card-tools">
                     <a href="/ekskuls/add" class="btn btn-primary">Add Data</a>
+                    <a href="/ekskuls/show_delete" class="btn btn-info">Show Deleted Data</a>
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                         title="Collapse">
                         <i class="fas fa-minus"></i>
