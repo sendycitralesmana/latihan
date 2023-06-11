@@ -123,10 +123,16 @@
                             </td>
                             <td>{{ $data->class->teachers->name }}</td> --}}
                             <td>
-                                <a class="btn btn-info btn-sm" href="/students/{{ $data->id }}/detail">Detail</a>
-                                <a class="btn btn-warning btn-sm" href="/students/{{ $data->id }}/edit">Edit</a>
-                                <a class="btn btn-danger btn-sm" href="/students/{{ $data->id }}/delete"
+                                @if (Auth::user()->id_role != 1 && Auth::user()->id_role != 2)
+                                -                                
+                                @else
+                                    <a class="btn btn-info btn-sm" href="/students/{{ $data->id }}/detail">Detail</a>
+                                    <a class="btn btn-warning btn-sm" href="/students/{{ $data->id }}/edit">Edit</a>
+                                @endif
+                                @if (Auth::user()->id_role == 1)
+                                    <a class="btn btn-danger btn-sm" href="/students/{{ $data->id }}/delete"
                                     onClick="return confirm('Anda Yakin ?')">Delete</a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

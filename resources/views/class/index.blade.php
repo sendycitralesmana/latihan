@@ -68,9 +68,11 @@
                             <td>{{ $data->teachers['name'] }}</td> --}}
                             <td>
                                 <a class="btn btn-info btn-sm" href="/class/{{ $data->id }}/detail">Detail</a>
-                                <a class="btn btn-warning btn-sm" href="/class/{{ $data->id }}/edit">Edit</a>
-                                <a class="btn btn-danger btn-sm" href="/class/{{ $data->id }}/delete"
-                                    onClick="return confirm('Anda Yakin ?')">Delete</a>
+                                @if (Auth::user()->id_role == 1)
+                                    <a class="btn btn-warning btn-sm" href="/class/{{ $data->id }}/edit">Edit</a>
+                                    <a class="btn btn-danger btn-sm" href="/class/{{ $data->id }}/delete"
+                                        onClick="return confirm('Anda Yakin ?')">Delete</a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
