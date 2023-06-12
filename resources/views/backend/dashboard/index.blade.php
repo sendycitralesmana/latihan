@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="card-body">
-                
+                <x-alert message='Dashboard page' type='success' />
             </div>
             <!-- /.card-body -->
             <div class="card-footer">
