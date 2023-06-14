@@ -63,7 +63,7 @@
                                 @endforeach
                             </td> --}}
                             <td>
-                                <a class="btn btn-warning btn-sm" href="/ekskuls/{{ $data->id }}/restore"
+                                <a class="btn btn-warning btn-sm" href="/ekskuls/{{ $data->slug }}/restore"
                                     onClick="return confirm('Anda Yakin ?')">Restore</a>
                             </td>
                         </tr>

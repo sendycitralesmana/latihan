@@ -61,9 +61,9 @@
                             <td>{{ $data->name }}</td>
                             <td>
                                 @if (Auth::user()->id_role == 1)
-                                    <a class="btn btn-info btn-sm" href="/teachers/{{ $data->id }}/detail">Detail</a>
-                                    <a class="btn btn-warning btn-sm" href="/teachers/{{ $data->id }}/edit">Edit</a>
-                                    <a class="btn btn-danger btn-sm" href="/teachers/{{ $data->id }}/delete"
+                                    <a class="btn btn-info btn-sm" href="/teachers/{{ $data->slug }}/detail">Detail</a>
+                                    <a class="btn btn-warning btn-sm" href="/teachers/{{ $data->slug }}/edit">Edit</a>
+                                    <a class="btn btn-danger btn-sm" href="/teachers/{{ $data->slug }}/delete"
                                         onClick="return confirm('Anda Yakin ?')">Delete</a>
                                 @else
                                 -

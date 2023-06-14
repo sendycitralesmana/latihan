@@ -11,7 +11,8 @@ class Teacher extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name'
+        'name',
+        'slug'
     ];
 
     public function class()

@@ -12,7 +12,8 @@ class Ekskul extends Model
 
     protected $table = 'ekskuls';
     protected $fillable = [
-        'name'
+        'name',
+        'slug'
     ];
 
     public function students()

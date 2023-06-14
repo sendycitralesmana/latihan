@@ -58,7 +58,7 @@
                             <td>{{ $data->id }}</td>
                             <td>{{ $data->name }}</td>
                             <td>
-                                <a class="btn btn-warning btn-sm" href="/teachers/{{ $data->id }}/restore"
+                                <a class="btn btn-warning btn-sm" href="/teachers/{{ $data->slug }}/restore"
                                     onClick="return confirm('Anda Yakin ?')">Restore</a>
                             </td>
                         </tr>

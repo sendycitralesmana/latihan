@@ -65,7 +65,7 @@
                             </td>
                             <td>{{ $data->teachers['name'] }}</td> --}}
                             <td>
-                                <a class="btn btn-warning btn-sm" href="/class/{{ $data->id }}/restore"
+                                <a class="btn btn-warning btn-sm" href="/class/{{ $data->slug }}/restore"
                                     onClick="return confirm('Anda Yakin ?')">Restore</a>
                             </td>
                         </tr>

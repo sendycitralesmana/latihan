@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Teacher;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Http\Requests\Teacher\TeacherCreateRequest;
 
 class TeacherController extends Controller
@@ -34,23 +35,25 @@ class TeacherController extends Controller
     {
         $teachers = new Teacher;
         $teachers->name = $request->name;
+        $teachers->slug = Str::slug($request->name, '-');
         $teachers->save();
 
         return redirect('/teachers')->with('success', 'Success add data');
     }
 
-    public function detail($id)
+    public function detail($slug)
     {
         // $teacher = Teacher::all();
-        $teachers = Teacher::with('class.students')->findOrFail($id);     // eloquent relationship
+        $teachers = Teacher::with('class.students')
+                    ->where('slug', $slug)->first();      // eloquent relationship
         return view('teachers/detail', [
             'teachers' => $teachers
         ]);
     }
 
-    public function edit($id)
+    public function edit($slug)
     {
-        $teachers = Teacher::findOrFail($id);
+        $teachers = Teacher::where('slug', $slug)->first();;
         return view('teachers/edit', [
             'teachers' => $teachers
         ]);
@@ -61,22 +64,34 @@ class TeacherController extends Controller
         // dd($request->all());
         $teachers = Teacher::findOrFail($id);
         $teachers->name = $request->name;
+        $teachers->slug = Str::slug($request->name, '-');
         $teachers->save();
 
         return redirect('/teachers')->with('success', 'Success update data');
     }
 
-    public function delete($id)
+    public function massUpdate()    // isi column slug yang masih null
     {
-        $teachers = Teacher::findOrFail($id);
-        $teachers->delete();
+        $teachers = Teacher::whereNull('slug')->get();
+        collect($teachers)->map(function($item) {
+            $item->slug = Str::slug($item->name, '-');
+            $item->save();
+        });
 
-        return redirect('/teachers')->with('success', 'Success delete data dengan id' . $id );
+        return redirect('/teachers')->with('success', 'Success update data');
     }
 
-    public function restore($id)
+    public function delete($slug)
     {
-        $teachers = Teacher::withTrashed()->where('id', $id)->restore();
+        $teachers = Teacher::where('slug', $slug)->first();;
+        $teachers->delete();
+
+        return redirect('/teachers')->with('success', 'Success delete data dengan id' . $slug );
+    }
+
+    public function restore($slug)
+    {
+        $teachers = Teacher::withTrashed()->where('slug', $slug)->restore();
         
         return redirect('/teachers')->with('success', 'Success restore data');
     }

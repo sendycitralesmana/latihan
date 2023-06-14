@@ -6,6 +6,7 @@ use App\Http\Requests\Students\StudentCreateRequest;
 use Illuminate\Http\Request;
 use \App\Models\Students;
 use \App\Models\ClassRoom;
+use Illuminate\Support\Str;
 
 class StudentsController extends Controller
 {
@@ -61,6 +62,7 @@ class StudentsController extends Controller
         $students->gender = $request->gender;
         $students->id_class = $request->id_class;
         $students->image = $newName;
+        $students->slug = Str::slug($request->name, '-');
         $students->save();
         
         // php artisan make:request nama_request -> app->http->request
@@ -75,18 +77,21 @@ class StudentsController extends Controller
         // $students = Students::create($request->all()); Mass assignment
     }
 
-    public function detail($id)
+    public function detail($slug)
     {
         // $students = Students::all();
-        $students = Students::with(['class.teachers', 'ekskuls'])->findOrFail($id);     // eloquent relationship
+        $students = Students::with(['class.teachers', 'ekskuls'])
+                    ->where('slug', $slug)->first();     // eloquent relationship
         return view('students/detail', [
             'students' => $students
         ]);
     }
 
-    public function edit($id)
+    public function edit($slug)
     {
-        $students = Students::with('class')->findOrFail($id);
+        // $students = Students::with('class')->findOrFail($slug);
+        $students = Students::with('class')
+                    ->where('slug', $slug)->first();
         $class = ClassRoom::where('id', '!=', $students->id_class)->get();
         return view('students/edit', [
             'students' => $students,
@@ -102,22 +107,36 @@ class StudentsController extends Controller
         $students->nis = $request->nis;
         $students->gender = $request->gender;
         $students->id_class = $request->id_class;
+        $students->slug = Str::slug($request->name, '-');
         $students->save();
 
         return redirect('/students')->with('success', 'Success update data');
     }
 
-    public function delete($id)
+    public function massUpdate()    // isi column slug yang masih null
     {
-        $students = Students::findOrFail($id);
-        $students->delete();
+        // $students = Students::all(); //
+        $students = Students::whereNull('slug')->get();
+        collect($students)->map(function($item) {
+            $item->slug = Str::slug($item->name, '-');
+            $item->save();
+        });
 
-        return redirect('/students')->with('success', 'Success delete data dengan id' . $id );
+        return redirect('/students')->with('success', 'Success update data');
     }
 
-    public function restore($id)
+    public function delete($slug)
     {
-        $students = Students::withTrashed()->where('id', $id)->restore();
+        // $students = Students::findOrFail($id);
+        $students = Students::where('slug', $slug)->first();;
+        $students->delete();
+
+        return redirect('/students')->with('success', 'Success delete data dengan id' . $slug );
+    }
+
+    public function restore($slug)
+    {
+        $students = Students::withTrashed()->where('slug', $slug)->restore();
         
         return redirect('/students')->with('success', 'Success restore data');
     }

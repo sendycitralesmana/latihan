@@ -79,6 +79,7 @@ Route::group(['middleware' => ['auth', 'admin']], function(){
     Route::put('/class/{id}/update', [ClassController::class, 'update']);
     Route::get('/class/{id}/delete', [ClassController::class, 'delete']);
     Route::get('/class/{id}/restore', [ClassController::class, 'restore']);
+    Route::get('/class/massUpdate', [ClassController::class, 'massUpdate']);  // isi column slug yang masih null
 
     // ekskul
     Route::get('/ekskuls/show_delete', [EkskulController::class, 'show_delete']);
@@ -88,6 +89,7 @@ Route::group(['middleware' => ['auth', 'admin']], function(){
     Route::put('/ekskuls/{id}/update', [EkskulController::class, 'update']);
     Route::get('/ekskuls/{id}/delete', [EkskulController::class, 'delete']);
     Route::get('/ekskuls/{id}/restore', [EkskulController::class, 'restore']);
+    Route::get('/ekskuls/massUpdate', [EkskulController::class, 'massUpdate']);  // isi column slug yang masih null
 
     // teacher
     Route::get('/teachers/show_delete', [TeacherController::class, 'show_delete']);
@@ -98,6 +100,7 @@ Route::group(['middleware' => ['auth', 'admin']], function(){
     Route::put('/teachers/{id}/update', [TeacherController::class, 'update']);
     Route::get('/teachers/{id}/delete', [TeacherController::class, 'delete']);
     Route::get('/teachers/{id}/restore', [TeacherController::class, 'restore']);
+    Route::get('/teachers/massUpdate', [TeacherController::class, 'massUpdate']);  // isi column slug yang masih null
 
 });
 
@@ -110,5 +113,6 @@ Route::group(['middleware' => ['auth', 'adminOrTeacher']], function(){
     Route::get('/students/{id}/edit', [StudentsController::class, 'edit']);
     Route::get('/students/{id}/detail', [StudentsController::class, 'detail']);
     Route::put('/students/{id}/update', [StudentsController::class, 'update']);
+    Route::get('/students/massUpdate', [StudentsController::class, 'massUpdate']);  // isi column slug yang masih null
 
 });
