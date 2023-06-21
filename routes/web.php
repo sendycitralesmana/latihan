@@ -2,13 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Backend\DashboardController as DashboardController;
-use App\Http\Controllers\Backend\CustomerController as CustomerController;
-use App\Http\Controllers\StudentsController as StudentsController;
+use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\AuthController as AuthController;
 use App\Http\Controllers\ClassController as ClassController;
 use App\Http\Controllers\EkskulController as EkskulController;
 use App\Http\Controllers\TeacherController as TeacherController;
-use App\Http\Controllers\AuthController as AuthController;
+use App\Http\Controllers\StudentsController as StudentsController;
+use App\Http\Controllers\Backend\CustomerController as CustomerController;
+use App\Http\Controllers\Backend\DashboardController as DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +66,8 @@ Route::group(['middleware' => 'auth'], function(){
 
 // role admin
 Route::group(['middleware' => ['auth', 'admin']], function(){
+
+    Route::get('/schools', [SchoolController::class, 'index']);
 
     // student
     Route::get('/students/show_delete', [StudentsController::class, 'show_delete']);
