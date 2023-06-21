@@ -6,6 +6,7 @@ use App\Models\Teacher;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\Teacher\TeacherCreateRequest;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class TeacherController extends Controller
 {
@@ -35,7 +36,8 @@ class TeacherController extends Controller
     {
         $teachers = new Teacher;
         $teachers->name = $request->name;
-        $teachers->slug = Str::slug($request->name, '-');
+        // $teachers->slug = Str::slug($request->name, '-');
+        $teachers->slug = SlugService::createSlug(Teacher::class, 'slug', $request->name);
         $teachers->save();
 
         return redirect('/teachers')->with('success', 'Success add data');
@@ -64,7 +66,8 @@ class TeacherController extends Controller
         // dd($request->all());
         $teachers = Teacher::findOrFail($id);
         $teachers->name = $request->name;
-        $teachers->slug = Str::slug($request->name, '-');
+        // $teachers->slug = Str::slug($request->name, '-');
+        $teachers->slug = SlugService::createSlug(Teacher::class, 'slug', $request->name);
         $teachers->save();
 
         return redirect('/teachers')->with('success', 'Success update data');

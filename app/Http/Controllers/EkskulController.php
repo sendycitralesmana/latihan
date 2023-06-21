@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Ekskul;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Request\Ekskul\EkskulCreateRequest;
+use App\Http\Requests\Ekskul\EkskulCreateRequest;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 
 class EkskulController extends Controller
@@ -33,12 +34,15 @@ class EkskulController extends Controller
         return view('ekskuls/add');
     }
 
-    public function create(ClassCreateRequest $request)
+    public function create(EkskulCreateRequest $request)
     {
         $ekskuls = new Ekskul;
         $ekskuls->name = $request->name;
-        $ekskuls->slug = Str::slug($request->name, '-');
+        // $ekskuls->slug = Str::slug($request->name, '-');
+        $ekskuls->slug = SlugService::createSlug(Ekskul::class, 'slug', $request->name);
         $ekskuls->save();
+
+        // $ekskuls = Ekskul::create($request->all());
 
         return redirect('/ekskuls')->with('success', 'Success add data');
     }
@@ -65,9 +69,13 @@ class EkskulController extends Controller
     {
         // dd($request->all());
         $ekskuls = Ekskul::findOrFail($id);
-        $ekskuls->name = $request->name;
-        $ekskuls->slug = Str::slug($request->name, '-');
-        $ekskuls->save();
+        // $ekskuls->name = $request->name;
+        // $ekskuls->slug = Str::slug($request->name, '-');
+        // $ekskuls->save();
+
+        // mass assignment
+        $ekskuls['slug'] = SlugService::createSlug(Ekskul::class, 'slug', $request->name);
+        $ekskuls->update($request->all());
 
         return redirect('/ekskuls')->with('success', 'Success update data');
     }

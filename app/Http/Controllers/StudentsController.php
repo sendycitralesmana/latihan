@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use \App\Models\Students;
 use \App\Models\ClassRoom;
 use Illuminate\Support\Str;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class StudentsController extends Controller
 {
@@ -56,14 +57,18 @@ class StudentsController extends Controller
         // data di folder storage tidak bisa di akses di browser kita maka harus kita hubungkan ke folder publik
         // php artisan storage:link
         
-        $students = new Students;
-        $students->name = $request->name;
-        $students->nis = $request->nis;
-        $students->gender = $request->gender;
-        $students->id_class = $request->id_class;
-        $students->image = $newName;
-        $students->slug = Str::slug($request->name, '-');
-        $students->save();
+        // $students = new Students;
+        // $students->name = $request->name;
+        // $students->nis = $request->nis;
+        // $students->gender = $request->gender;
+        // $students->id_class = $request->id_class;
+        // $students->image = $newName;
+        // $students->slug = Str::slug($request->name, '-');
+        // $students->save();
+
+        // create mass assignment
+        $students['image'] = $newName;
+        $students = Students::create($request->all());
         
         // php artisan make:request nama_request -> app->http->request
         // $validated = $request->validate([
@@ -103,12 +108,16 @@ class StudentsController extends Controller
     {
         // dd($request->all());
         $students = Students::findOrFail($id);
-        $students->name = $request->name;
-        $students->nis = $request->nis;
-        $students->gender = $request->gender;
-        $students->id_class = $request->id_class;
-        $students->slug = Str::slug($request->name, '-');
-        $students->save();
+        // $students->name = $request->name;
+        // $students->nis = $request->nis;
+        // $students->gender = $request->gender;
+        // $students->id_class = $request->id_class;
+        // $students->slug = Str::slug($request->name, '-');
+        // $students->save();
+
+        // mass assignment
+        $students['slug'] = SlugService::createSlug(Students::class, 'slug', $request->name);
+        $students->update($request->all());
 
         return redirect('/students')->with('success', 'Success update data');
     }
