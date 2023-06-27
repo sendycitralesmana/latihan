@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\LogActivitiesController;
 use App\Http\Controllers\AuthController as AuthController;
 use App\Http\Controllers\ClassController as ClassController;
@@ -130,3 +131,5 @@ Route::group(['middleware' => ['auth', 'adminOrTeacher']], function(){
     Route::get('/students/massUpdate', [StudentsController::class, 'massUpdate']);  // isi column slug yang masih null
 
 });
+
+Route::get('/send-email', [SendEmailController::class, 'index']);
