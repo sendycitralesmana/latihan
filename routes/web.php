@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\LogActivitiesController;
 use App\Http\Controllers\AuthController as AuthController;
 use App\Http\Controllers\ClassController as ClassController;
 use App\Http\Controllers\EkskulController as EkskulController;
@@ -67,7 +69,16 @@ Route::group(['middleware' => 'auth'], function(){
 // role admin
 Route::group(['middleware' => ['auth', 'admin']], function(){
 
+    // school
     Route::get('/schools', [SchoolController::class, 'index']);
+
+    // products
+    Route::get('/products', [ProductController::class, 'index']);
+    Route::get('/products/create', [ProductController::class, 'create']);
+
+    // log activities
+    Route::get('/log-activities', [LogActivitiesController::class, 'index']);
+    Route::get('/log-activities/create', [LogActivitiesController::class, 'create']);
 
     // student
     Route::get('/students/show_delete', [StudentsController::class, 'show_delete']);
