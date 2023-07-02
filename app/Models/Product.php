@@ -24,13 +24,4 @@ class Product extends Model
             ]
         ];
     }
-
-    protected static function booted(): void
-    {
-        static::created(function ($products) {
-            LogActivities::create([
-                'description' => 'create product '.$products->name
-            ]);
-        });
-    }
 }
