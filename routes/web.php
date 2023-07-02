@@ -134,3 +134,4 @@ Route::group(['middleware' => ['auth', 'adminOrTeacher']], function(){
 });
 
 Route::get('/send-email', [SendEmailController::class, 'index']);
+Route::get('/email/newsletter', [SendEmailController::class, 'newsletter']);
