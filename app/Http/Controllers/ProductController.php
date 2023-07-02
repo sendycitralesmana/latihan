@@ -40,4 +40,12 @@ class ProductController extends Controller
 
         return redirect('/products')->with('success', 'Success add data');
     }
+
+    public function created()
+    {
+        $products = new Product;
+        $products->name = "product test";
+        $products->slug = SlugService::createSlug(Product::class, 'slug', $products->name);
+        $products->save();
+    }
 }
