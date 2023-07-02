@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\LogActivities;
+use App\Events\ProductCreated;
 use Illuminate\Support\Facades\DB;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -43,9 +44,11 @@ class ProductController extends Controller
 
     public function created()
     {
-        $products = new Product;
-        $products->name = "product test";
-        $products->slug = SlugService::createSlug(Product::class, 'slug', $products->name);
-        $products->save();
+        $product = new Product;
+        $product->name = "product@gmail.com";
+        $product->slug = SlugService::createSlug(Product::class, 'slug', $product->name);
+        $product->save();
+
+        ProductCreated::dispatch($product);
     }
 }

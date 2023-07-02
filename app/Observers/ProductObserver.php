@@ -13,9 +13,9 @@ class ProductObserver
      */
     public function created(Product $product): void
     {
-        $logs = new LogActivities;
-        $logs->description = "Create product ".$product->name;
-        $logs->save();
+        // $logs = new LogActivities;
+        // $logs->description = "Create product ".$product->name;
+        // $logs->save();
     }
 
     /**

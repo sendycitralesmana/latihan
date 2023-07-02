@@ -41,7 +41,7 @@ class TestSendingEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails/test-mail',
+            view: 'emails/test',
         );
     }
 
