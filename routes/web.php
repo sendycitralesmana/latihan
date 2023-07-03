@@ -46,7 +46,7 @@ Route::get('/customer/{id}/delete', [CustomerController::class, 'delete']);
 
 // Auth
 Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
-Route::post('/postLogin', [AuthController::class, 'postLogin'])->middleware('guest');
+Route::post('/postLogin', [AuthController::class, 'postLogin'])->middleware('guest', 'throttle:login');
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
 // all role
