@@ -1,6 +1,6 @@
 @extends('backend.layout.main')
 
-@section('title', 'Post')
+@section('title', 'Video')
 
 @section('content')
 <!-- Content Wrapper. Contains page content -->
@@ -10,12 +10,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Post Page</h1>
+                    <h1>Video Page</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard/backend">Home</a></li>
-                        <li class="breadcrumb-item active">Post Page</li>
+                        <li class="breadcrumb-item active">Video Page</li>
                     </ol>
                 </div>
             </div>
@@ -36,8 +36,8 @@
                 </div>
                 @endif
                 <div class="card-tools">
-                    <a href="/post/add" class="btn btn-primary">Add Data</a>
-                    <a href="/post/show_delete" class="btn btn-info">Show Deleted Data</a>
+                    <a href="/video/add" class="btn btn-primary">Add Data</a>
+                    <a href="/video/show_delete" class="btn btn-info">Show Deleted Data</a>
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                         title="Collapse">
                         <i class="fas fa-minus"></i>
@@ -45,31 +45,29 @@
                 </div>
             </div>
             <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped">
+                <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Title</th>
-                            <th>Post</th>
-                            <th>Images</th>
+                            <th>Url</th>
                             <th>Option</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($post as $data)
+                        @foreach($video as $data)
                         <tr>
                             <td>{{ $data->id }}</td>
                             <td>{{ $data->title }}</td>
-                            <td>{{ $data->post_body }}</td>
-                            <td>{{ $data->image ? $data->image->filename : "" }}</td>
+                            <td>{{ $data->url }}</td>
                             <td>
-                                <a class="btn btn-info btn-sm" href="/posts/{{ $data->id }}/detail">Detail</a>
+                                <a class="btn btn-info btn-sm" href="/videos/{{ $data->id }}/detail">Detail</a>
                                 @if (Auth::user()->id_role == 1)
-                                    <a class="btn btn-warning btn-sm" href="/posts/{{ $data->id }}/edit">Edit</a>
-                                    <a class="btn btn-danger btn-sm" href="/posts/{{ $data->id }}/delete"
-                                        onClick="return confirm('Anda Yakin ?')">Delete</a>
+                                <a class="btn btn-warning btn-sm" href="/videos/{{ $data->id }}/edit">Edit</a>
+                                <a class="btn btn-danger btn-sm" href="/videos/{{ $data->id }}/delete"
+                                    onClick="return confirm('Anda Yakin ?')">Delete</a>
                                 @else
-                                -   
+                                -
                                 @endif
                             </td>
                         </tr>
@@ -79,8 +77,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Title</th>
-                            <th>Post</th>
-                            <th>Images</th>
+                            <th>Url</th>
                             <th>Option</th>
                         </tr>
                     </tfoot>

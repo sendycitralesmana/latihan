@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VideoController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SendEmailController;
@@ -80,6 +81,11 @@ Route::group(['middleware' => ['auth', 'admin']], function(){
 
     // post
     Route::get('/posts', [PostController::class, 'index']);
+    Route::get('/posts/{id}/detail', [PostController::class, 'detail']);
+
+    // video
+    Route::get('/videos', [VideoController::class, 'index']);
+    Route::get('/videos/{id}/detail', [VideoController::class, 'detail']);
 
     // products
     Route::get('/products', [ProductController::class, 'index']);

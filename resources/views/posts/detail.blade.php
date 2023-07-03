@@ -36,8 +36,6 @@
                 </div>
                 @endif
                 <div class="card-tools">
-                    <a href="/post/add" class="btn btn-primary">Add Data</a>
-                    <a href="/post/show_delete" class="btn btn-info">Show Deleted Data</a>
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                         title="Collapse">
                         <i class="fas fa-minus"></i>
@@ -45,43 +43,25 @@
                 </div>
             </div>
             <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped">
+                <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Title</th>
-                            <th>Post</th>
-                            <th>Images</th>
-                            <th>Option</th>
+                            <th>Comments</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($post as $data)
+                        @foreach($post->comments as $data)
                         <tr>
                             <td>{{ $data->id }}</td>
-                            <td>{{ $data->title }}</td>
-                            <td>{{ $data->post_body }}</td>
-                            <td>{{ $data->image ? $data->image->filename : "" }}</td>
-                            <td>
-                                <a class="btn btn-info btn-sm" href="/posts/{{ $data->id }}/detail">Detail</a>
-                                @if (Auth::user()->id_role == 1)
-                                    <a class="btn btn-warning btn-sm" href="/posts/{{ $data->id }}/edit">Edit</a>
-                                    <a class="btn btn-danger btn-sm" href="/posts/{{ $data->id }}/delete"
-                                        onClick="return confirm('Anda Yakin ?')">Delete</a>
-                                @else
-                                -   
-                                @endif
-                            </td>
+                            <td>{{ $data->comment_body }}</td>
                         </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
                             <th>ID</th>
-                            <th>Title</th>
-                            <th>Post</th>
-                            <th>Images</th>
-                            <th>Option</th>
+                            <th>Comments</th>
                         </tr>
                     </tfoot>
                 </table>
