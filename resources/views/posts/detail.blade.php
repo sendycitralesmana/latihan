@@ -47,7 +47,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Comments</th>
+                            <th>Comment</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,7 +61,29 @@
                     <tfoot>
                         <tr>
                             <th>ID</th>
-                            <th>Comments</th>
+                            <th>Comment</th>
+                        </tr>
+                    </tfoot>
+                </table>
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tag</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($post->tags as $data)
+                        <tr>
+                            <td>{{ $data->id }}</td>
+                            <td>{{ $data->name }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tag</th>
                         </tr>
                     </tfoot>
                 </table>
