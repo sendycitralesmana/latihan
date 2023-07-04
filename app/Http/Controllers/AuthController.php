@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -39,6 +42,27 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/login');
+    }
+
+    public function register()
+    {
+        return view('auths/register');
+    }
+
+    public function registerProcess(Request $request)
+    {
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->id_role = 3;
+        $user->password = Hash::make($request->name);
+        $user->save();
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        return redirect('/email/verify');
     }
 
 }

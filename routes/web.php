@@ -9,6 +9,7 @@ use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\LogActivitiesController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\AuthController as AuthController;
 use App\Http\Controllers\ClassController as ClassController;
 use App\Http\Controllers\EkskulController as EkskulController;
@@ -48,6 +49,22 @@ Route::get('/customer/{id}/delete', [CustomerController::class, 'delete']);
 Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/postLogin', [AuthController::class, 'postLogin'])->middleware('guest', 'throttle:login');
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
+Route::get('/register', [AuthController::class, 'register'])->middleware('guest');
+Route::post('/registerProcess', [AuthController::class, 'registerProcess'])->middleware('guest');
+
+Route::get('/email/verify', function () {
+    return view('auths/verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+ 
+    return redirect('/profile');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::get('/profile', function() {
+    return view('users/profile');
+})->middleware('auth', 'verified');
 
 // all role
 Route::group(['middleware' => 'auth'], function(){
