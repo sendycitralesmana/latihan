@@ -10,6 +10,7 @@ use App\Http\Controllers\CountryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\LogActivitiesController;
+use App\Http\Controllers\StudentEkskulController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\AuthController as AuthController;
 use App\Http\Controllers\ClassController as ClassController;
@@ -72,10 +73,13 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::get('/dashboard/backend', [DashboardController::class, 'index']);
 
-    // user
+    // User
     Route::get('/users', [UserController::class, 'index']);
     Route::get('/users/change-password', [UserController::class, 'changePassword']);
     Route::post('/users/process-change-password', [UserController::class, 'processChangePassword']);
+
+    // Student Ekskul
+    Route::get('/attach-detach', [StudentEkskulController::class, 'attackDettach']);
 
     // Student
     Route::get('/students', [StudentsController::class, 'index']);
