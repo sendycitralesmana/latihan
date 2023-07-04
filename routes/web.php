@@ -72,6 +72,11 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::get('/dashboard/backend', [DashboardController::class, 'index']);
 
+    // user
+    Route::get('/users', [UserController::class, 'index']);
+    Route::get('/users/change-password', [UserController::class, 'changePassword']);
+    Route::post('/users/process-change-password', [UserController::class, 'processChangePassword']);
+
     // Student
     Route::get('/students', [StudentsController::class, 'index']);
 
@@ -93,9 +98,6 @@ Route::group(['middleware' => ['auth', 'admin']], function(){
 
     // school
     Route::get('/schools', [SchoolController::class, 'index']);
-
-    // user
-    Route::get('/users', [UserController::class, 'index']);
 
     // post
     Route::get('/posts', [PostController::class, 'index']);
