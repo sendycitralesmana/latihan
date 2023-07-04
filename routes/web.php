@@ -6,6 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\LogActivitiesController;
@@ -112,6 +113,10 @@ Route::group(['middleware' => ['auth', 'admin']], function(){
     // log activities
     Route::get('/log-activities', [LogActivitiesController::class, 'index']);
     Route::get('/log-activities/create', [LogActivitiesController::class, 'create']);
+
+    // country
+    Route::get('/countries', [CountryController::class, 'index']);
+    Route::get('/countries/upsert', [CountryController::class, 'upsert']);
 
     // student
     Route::get('/students/show_delete', [StudentsController::class, 'show_delete']);
