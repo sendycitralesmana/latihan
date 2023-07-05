@@ -1,6 +1,6 @@
 @extends('backend.layout.main')
 
-@section('title', 'Ekskul')
+@section('title', 'School')
 
 @section('content')
 <!-- Content Wrapper. Contains page content -->
@@ -10,12 +10,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Ekskul Page</h1>
+                    <h1>School Page</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard/backend">Home</a></li>
-                        <li class="breadcrumb-item active">Ekskul Page</li>
+                        <li class="breadcrumb-item active">School Page</li>
                     </ol>
                 </div>
             </div>
@@ -46,7 +46,21 @@
                 </div>
             </div>
             <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped">
+
+                <div class="my-3">
+                    <form action="" method="GET">
+                        <div class="input-group input-group mb-3 col-12 col-sm-8 col-md-6">
+                            <input class="form-control" placeholder="Search" name="search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+
+            <table id="example" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>ID</th>

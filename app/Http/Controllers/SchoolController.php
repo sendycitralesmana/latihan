@@ -9,9 +9,14 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class SchoolController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $schools = School::all();
+        // composer require laravel/scout
+        if($request->search) {
+            $schools = School::search($request->search)->get();
+        } else {
+            $schools = School::all();
+        }
         return view('schools/index', [
             'schools' => $schools
         ]);
