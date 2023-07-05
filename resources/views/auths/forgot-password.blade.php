@@ -27,8 +27,22 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
-      <form action="/postLogin" method="POST">
+      <p class="login-box-msg">Forgot password</p>
+      @if($errors->any())
+        <div class="alert alert-danger">
+            <button type="button" class="btn btn-danger close" data-dismiss="alert" sty>&times;</button>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </div>
+      @endif
+      @if (Session::has('status'))
+          <div class="alert alert-success" role="alert">
+            <button type="button" class="btn btn-success close" data-dismiss="alert" sty>&times;</button>
+            {{Session::get('status')}}
+          </div>
+      @endif
+      <form action="/process-forgot-password" method="POST">
         {{ csrf_field() }}
         <div class="input-group mb-3">
           <input type="email" name="email" class="form-control" placeholder="Email">
@@ -38,21 +52,10 @@
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
-          <input type="password" name="password" class="form-control" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
         <div class="row">
-          <div class="col-6">
-            <a href="/register" class="btn btn-info btn-block" style="color: aliceblue">Register</a>
-          </div>
           <!-- /.col -->
-          <div class="col-6">
-            <button type="submit" class="btn btn-primary btn-block" style="color: aliceblue">Sign In</button>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-block" style="color: aliceblue">Request password reset</button>
           </div>
           <!-- /.col -->
         </div>

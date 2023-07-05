@@ -68,6 +68,12 @@ Route::get('/profile', function() {
     return view('users/profile');
 })->middleware('auth', 'verified');
 
+
+Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->middleware('guest')->name('password.request');
+Route::post('/process-forgot-password', [AuthController::class, 'processForgotPassword'])->middleware('guest')->name('password.email');
+Route::get('/reset-password/{token}', [AuthController::class, 'resetPassword'])->middleware('guest')->name('password.reset');
+Route::post('/process-reset-password', [AuthController::class, 'processResetPassword'])->middleware('guest')->name('password.update');
+
 // all role
 Route::group(['middleware' => 'auth'], function(){
 
