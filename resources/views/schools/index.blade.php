@@ -36,8 +36,9 @@
                 </div>
                 @endif
                 <div class="card-tools">
-                    <a href="/ekskuls/add" class="btn btn-primary">Add Data</a>
-                    <a href="/ekskuls/show_delete" class="btn btn-info">Show Deleted Data</a>
+                    <a href="/schools/add" class="btn btn-primary">Add Data</a>
+                    <a href="/schools/export-pdf" class="btn btn-warning" onClick="return confirm('Anda Yakin ?')">Export PDF</a>
+                    <a href="/schools/show_delete" class="btn btn-info">Show Deleted Data</a>
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                         title="Collapse">
                         <i class="fas fa-minus"></i>

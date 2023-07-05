@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\School;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class SchoolController extends Controller
 {
@@ -13,5 +15,15 @@ class SchoolController extends Controller
         return view('schools/index', [
             'schools' => $schools
         ]);
+    }
+
+    public function exportPdf()
+    {
+        // composer require barryvdh/laravel-dompdf
+        $schools = School::all();
+        $pdf = Pdf::loadView('schools/school-pdf', [
+            'schools' => $schools
+        ]);
+        return $pdf->download('school-'.Carbon::now()->timestamp.'.pdf');
     }
 }

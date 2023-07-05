@@ -102,6 +102,7 @@ Route::group(['middleware' => ['auth', 'admin']], function(){
 
     // school
     Route::get('/schools', [SchoolController::class, 'index']);
+    Route::get('/schools/export-pdf', [SchoolController::class, 'exportPdf']);
 
     // post
     Route::get('/posts', [PostController::class, 'index']);
